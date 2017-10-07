@@ -1,0 +1,10 @@
+version: '3'
+services:
+  service:
+    build: .
+    ports:
+     - "8080:8080"
+    links:
+      - redis
+  redis:
+    image: "mongo:latest"
