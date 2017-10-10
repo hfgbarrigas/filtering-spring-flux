@@ -151,11 +151,11 @@
                     <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
                     <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
                     <excludes>
-                        <exclude>com/affinitas/filter/configuration/*.class</exclude>
-                        <exclude>com/affinitas/filter/model/**/*.class</exclude>
-                        <exclude>com/affinitas/filter/exceptions/*.class</exclude>
-                        <exclude>com/affinitas/filter/properties/*.class</exclude>
-                        <exclude>com/affinitas/filter/utils/*.class</exclude>
+                        <exclude>com/hfbarrigas/filter/configuration/*.class</exclude>
+                        <exclude>com/hfbarrigas/filter/model/**/*.class</exclude>
+                        <exclude>com/hfbarrigas/filter/exceptions/*.class</exclude>
+                        <exclude>com/hfbarrigas/filter/properties/*.class</exclude>
+                        <exclude>com/hfbarrigas/filter/utils/*.class</exclude>
                     </excludes>
                 </configuration>
                 <executions>
