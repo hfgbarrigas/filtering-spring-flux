@@ -1,14 +1,13 @@
-package com.affinitas.filter.model;
+package com.affinitas.filter.model.internal;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-@Document
-public class Person {
+@Document(collection = "people")
+public class Person implements Serializable {
 
-    @Id
     private String id;
     private Integer age;
     private String jobTitle;
@@ -20,6 +19,7 @@ public class Person {
     private String religion;
     private String displayName;
     private City city;
+
 
     public String getId() {
         return id;

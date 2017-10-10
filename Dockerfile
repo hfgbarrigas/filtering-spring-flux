@@ -15,5 +15,4 @@ EXPOSE 8080
 
 #execute run script
 RUN chmod 700 run.sh
-RUN ls -l
 CMD ["./run.sh"]

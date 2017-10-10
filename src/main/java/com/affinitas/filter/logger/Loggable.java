@@ -1,9 +1,10 @@
 package com.affinitas.filter.logger;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public interface Loggable {
     default Logger logger() {
-        return Logger.getLogger(this.getClass().getName());
+        return LoggerFactory.getLogger(this.getClass().getName());
     }
 }
