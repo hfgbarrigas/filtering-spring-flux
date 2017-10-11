@@ -35,5 +35,7 @@ browser - localhost:8081
 
 TODO
 ======
-remove dangling containers when build fails or it's interrupted
+- remove dangling containers when build fails or it's interrupted
 (docker ps -> docker kill/stop)
+- Webapp
+- Some improvements, move some values over to properties and leverage configuration server
