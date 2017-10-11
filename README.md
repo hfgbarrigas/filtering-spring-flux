@@ -7,7 +7,9 @@ During build time a mongo container is created and deleted in order to run integ
 Run
 =======
 Needs docker installed.
+
 Run - docker-compose build && docker-compose up
+
 Stop - docker-compose stop
 
 Api
