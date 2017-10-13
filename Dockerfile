@@ -5,10 +5,10 @@ FROM frolvlad/alpine-oraclejdk8:slim
 ADD deploy/scripts/run.sh run.sh
 
 # Create app directory on container
-RUN mkdir -p /usr/opt/filtering
+RUN mkdir -p /usr/opt/service
 
 # Bundle app source
-COPY ./target/filtering*.jar /usr/opt/service/filtering.jar
+COPY ./filter-service/target/filtering*.jar /usr/opt/service/filtering.jar
 
 # make port 8080 available
 EXPOSE 8080

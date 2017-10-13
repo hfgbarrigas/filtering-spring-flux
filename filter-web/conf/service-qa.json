@@ -1,0 +1,19 @@
+{
+  "api": {
+    "serverName": "Filtering API",
+    "port": 8081,
+    "maxConnections": 256,
+    "userAgent": "filter-api",
+    "upstreamKeepAlive": {
+      "maxSockets": 1024,
+      "maxFreeSockets": 64,
+      "timeout": 1000,
+      "keepAliveTimeout": 30000
+    }
+  },
+  "environment": "qa",
+  "bunyan": {
+    "name": "vizceral",
+    "streams": []
+  }
+}

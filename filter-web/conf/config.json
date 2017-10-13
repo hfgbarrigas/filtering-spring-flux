@@ -1,0 +1,20 @@
+{
+  "api": {
+    "serverName": "Filtering API",
+    "port": 8081,
+    "path": "/filtering",
+    "maxConnections": 256,
+    "userAgent": "filtering-api",
+    "upstreamKeepAlive": {
+      "maxSockets": 1024,
+      "maxFreeSockets": 64,
+      "timeout": 1000,
+      "keepAliveTimeout": 30000
+    }
+  },
+  "environment": "localdev",
+  "bunyan": {
+    "name": "filtering-api",
+    "streams": []
+  }
+}

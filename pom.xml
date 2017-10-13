@@ -6,7 +6,7 @@
     <groupId>com.affinitas</groupId>
     <artifactId>filtering</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>filtering</name>
     <description>Filtering api using Spring Boot 2.0 and Spring 5.0. Flux playground.
@@ -27,155 +27,16 @@
         <docker.maven.plugin.fabric8.version>0.22.1</docker.maven.plugin.fabric8.version>
     </properties>
 
-    <dependencies>
-        <!-- Spring boot -->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-rest</artifactId>
-        </dependency>-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-actuator</artifactId>
-        </dependency>
-        <!-- Spring data -->
-        <!--<dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-rest-hal-browser</artifactId>
-        </dependency>-->
-        <!-- Reactive redis-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
-        </dependency>
-        <!-- Reactive web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <!-- Test dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- Utils -->
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>annotations</artifactId>
-            <version>${findbugs.version}</version>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <!-- The Docker Maven plugin is used to create docker image with the fat jar -->
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>${docker.maven.plugin.fabric8.version}</version>
-                <configuration>
-                    <logDate>default</logDate>
-                    <autoPull>true</autoPull>
-                    <images>
-                        <image>
-                            <alias>mongo</alias>
-                            <name>mongo:latest</name>
-                            <run>
-                                <wait>
-                                    <log>waiting for connections on port 27017</log>
-                                    <time>3000</time>
-                                </wait>
-                                <log>
-                                    <prefix>mongo</prefix>
-                                    <color>yellow</color>
-                                </log>
-                                <ports>
-                                    <port>27017:27017</port>
-                                </ports>
-                            </run>
-                        </image>
-                    </images>
-                </configuration>
-
-                <!-- Hooking into the lifecycle -->
-                <executions>
-                    <execution>
-                        <id>start</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>start</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.17</version>
-                <executions>
-                    <execution>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <includes>
-                        <include>**/*IT.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.9</version>
-                <configuration>
-                    <destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
-                    <dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
-                    <excludes>
-                        <exclude>com/hfbarrigas/filter/configuration/*.class</exclude>
-                        <exclude>com/hfbarrigas/filter/model/**/*.class</exclude>
-                        <exclude>com/hfbarrigas/filter/exceptions/*.class</exclude>
-                        <exclude>com/hfbarrigas/filter/properties/*.class</exclude>
-                        <exclude>com/hfbarrigas/filter/utils/*.class</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>jacoco-initialize</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>jacoco-site</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+    <dependencyManagement>
+        <dependencies>
+            <!-- Utils -->
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${findbugs.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <repositories>
         <repository>
@@ -214,4 +75,9 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <modules>
+        <module>filter-service</module>
+        <module>filter-web</module>
+    </modules>
 </project>
