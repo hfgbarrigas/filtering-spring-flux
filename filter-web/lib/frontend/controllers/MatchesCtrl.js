@@ -19,7 +19,7 @@ function GoogleAPIAutocompleteCtrl(MatchesFactory, MatchDetails, $timeout, $root
 				precision: 0.01,
 				noSwitching: true,
 				showSelectionBar: true,
-				onChange: _load
+				onEnd: _load
 			}
 		},
 		ageSlider: {
@@ -31,7 +31,7 @@ function GoogleAPIAutocompleteCtrl(MatchesFactory, MatchDetails, $timeout, $root
 				step: 1,
 				noSwitching: true,
 				showSelectionBar: true,
-				onChange: _load
+				onEnd: _load
 			}
 		},
 		heightSlider: {
@@ -43,7 +43,7 @@ function GoogleAPIAutocompleteCtrl(MatchesFactory, MatchDetails, $timeout, $root
 				step: 1,
 				noSwitching: true,
 				showSelectionBar: true,
-				onChange: _load
+				onEnd: _load
 			}
 		},
 		distanceSlider: {
@@ -53,7 +53,7 @@ function GoogleAPIAutocompleteCtrl(MatchesFactory, MatchDetails, $timeout, $root
 				ceil: 1000,
 				step: 1,
 				showSelectionBar: true,
-				onChange: _load
+				onEnd: _load
 			}
 		}
 	};

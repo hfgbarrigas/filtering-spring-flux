@@ -1,4 +1,3 @@
-import {isUndefined, debounce} from 'lodash';
 import buildUrl from 'build-url';
 
 function MatchesFactory($http, $timeout, $rootScope) {
@@ -35,7 +34,7 @@ function MatchesFactory($http, $timeout, $rootScope) {
 	}
 
 	return {
-		getMatches: debounce(getMatches, 500, {leading: true})
+		getMatches: getMatches
 	}
 }
 

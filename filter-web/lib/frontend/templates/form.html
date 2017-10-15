@@ -71,6 +71,9 @@
         <strong>Matches</strong>
     </div>
     <div class="panel-body person_container">
-        <personDetails ng-repeat="personDetails in matchesCtrl.data.matches track by $index" person-details="personDetails"></personDetails>
+        <div ng-repeat="personDetails in matchesCtrl.data.matches track by $index">
+            <personDetails person-details="personDetails"></personDetails>
+            <hr/>
+        </div>
     </div>
 </div>
