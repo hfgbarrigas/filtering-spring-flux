@@ -7,7 +7,7 @@ module.exports = (config, log) => {
 
 	app.disable('x-powered-by');
 
-	app.get('/vizceral/health', (req, res) => res.json({status: 'UP'}));
+	app.get('/filtering/health', (req, res) => res.json({status: 'UP'}));
 
 	// generic error handler
 	app.use((err, req, res, next) => {

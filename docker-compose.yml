@@ -1,15 +1,27 @@
 version: '3'
 services:
-  service:
-    build: .
+  filter-service:
+    build: ./filter-service
     ports:
      - "8080:8080"
     links:
-      - mongo:mongo
+      - mongo
     depends_on:
       - mongo
     environment:
       - ENVIRONMENT=qa
+    container_name: filter-service
+  filter-web:
+    build: ./filter-web
+    ports:
+     - "8081:8081"
+    links:
+      - filter-service
+    depends_on:
+      - filter-service
+    environment:
+      - ENVIRONMENT=qa
+    container_name: filter-web
   mongo:
     image: "mongo:latest"
     container_name: mongo

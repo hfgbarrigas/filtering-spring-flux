@@ -26,7 +26,7 @@ curl localhost:8080/persons - H 'Accept: application/json'
 @Nullable @Min(135) @Max(210) @RequestParam(name = "minHeight", required = false)
 @Nullable @Min(135) @Max(210) @RequestParam(name = "maxHeight", required = false)
 @Nullable @Min(0) @RequestParam(name = "distance", required = false)
-@Nullable @Pattern(regexp = DISTANCE_UNIT_REGEX) @RequestParam(name = "distanceUnit", required = false)
+@Nullable @Pattern(regexp = (km|mi)) @RequestParam(name = "distanceUnit", required = false)
 @Nullable @RequestParam(name = "lat", required = false)
 @Nullable @RequestParam(name = "lon", required = false)`
 ```

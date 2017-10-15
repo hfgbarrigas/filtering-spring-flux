@@ -10,10 +10,7 @@ import com.hfbarrigas.filter.utils.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
 import javax.annotation.Nullable;
@@ -41,6 +38,7 @@ public class PersonApi implements Loggable {
 
     @GetMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
+    @CrossOrigin(origins = "*")
     public Flux<Person> persons(@Nullable @RequestParam(name = "hasPhoto", required = false) Boolean withPhoto,
                                 @Nullable @RequestParam(name = "inContact", required = false) Boolean inContact,
                                 @Nullable @RequestParam(name = "favourite", required = false) Boolean favourite,
@@ -68,6 +66,7 @@ public class PersonApi implements Loggable {
 
     @GetMapping(value = "/persons/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     @ResponseBody
+    @CrossOrigin(origins = "*")
     public Flux<Person> personsStream(@Nullable @RequestParam(name = "hasPhoto", required = false) Boolean withPhoto,
                                 @Nullable @RequestParam(name = "inContact", required = false) Boolean inContact,
                                 @Nullable @RequestParam(name = "favourite", required = false) Boolean favourite,

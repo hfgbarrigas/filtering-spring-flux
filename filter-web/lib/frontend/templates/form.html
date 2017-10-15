@@ -1,0 +1,76 @@
+<h2>Find your match</h2>
+<hr>
+<div class="form-horizontal">
+    <div class="form-inline">
+        <div class="checkbox checkbox-inline">
+            <input type="checkbox" id="withPhoto" ng-model="matchesCtrl.data.withPhoto"
+                   ng-change="matchesCtrl.functions.load()">
+            <label for="withPhoto"> With Photo</label>
+        </div>
+        <div class="checkbox checkbox-inline">
+            <input type="checkbox" id="inContact" ng-model="matchesCtrl.data.inContact"
+                   ng-change="matchesCtrl.functions.load()">
+            <label for="inContact"> In Contact</label>
+        </div>
+        <div class="checkbox checkbox-inline">
+            <input type="checkbox" id="favourite" ng-model="matchesCtrl.data.favourite"
+                   ng-change="matchesCtrl.functions.load()">
+            <label for="favourite"> Favourite</label>
+        </div>
+    </div>
+
+    <div>
+        <label class="control-label">Height</label>
+        <rzslider rz-slider-model="matchesCtrl.data.heightSlider.min"
+                  rz-slider-high="matchesCtrl.data.heightSlider.max"
+                  rz-slider-options="matchesCtrl.data.heightSlider.options">
+        </rzslider>
+    </div>
+
+    <div>
+        <label class="control-label">Age</label>
+        <rzslider rz-slider-model="matchesCtrl.data.ageSlider.min"
+                  rz-slider-high="matchesCtrl.data.ageSlider.max"
+                  rz-slider-options="matchesCtrl.data.ageSlider.options">
+        </rzslider>
+    </div>
+
+    <div>
+        <label class="control-label">Compatibility Score</label>
+        <rzslider rz-slider-model="matchesCtrl.data.compatibilitySlider.min"
+                  rz-slider-high="matchesCtrl.data.compatibilitySlider.max"
+                  rz-slider-options="matchesCtrl.data.compatibilitySlider.options">
+        </rzslider>
+    </div>
+
+    <div class="form-inline">
+        <label class="control-label">Distance</label>
+        <div class="distance__block">
+            <div class="checkbox checkbox-inline">
+                <input type="checkbox" id="distanceUnitKm" ng-model="matchesCtrl.data.distanceUnit"
+                       ng-change="matchesCtrl.functions.load()" ng-true-value="'km'" ng-false-value="'mi'">
+                <label for="distanceUnitKm">KM</label>
+            </div>
+            <div class="checkbox checkbox-inline">
+                <input type="checkbox" id="distanceUnitMi" ng-model="matchesCtrl.data.distanceUnit"
+                       ng-change="matchesCtrl.functions.load()" ng-true-value="'mi'" ng-false-value="'km'">
+                <label for="distanceUnitMi">MI</label>
+            </div>
+
+            <div class="distance__slider">
+                <rzslider rz-slider-model="matchesCtrl.data.distanceSlider.value"
+                          rz-slider-options="matchesCtrl.data.distanceSlider.options">
+                </rzslider>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- match details -->
+<div class="panel">
+    <div class="panel-heading">
+        <strong>Matches</strong>
+    </div>
+    <div class="panel-body person_container">
+        <personDetails ng-repeat="personDetails in matchesCtrl.data.matches track by $index" person-details="personDetails"></personDetails>
+    </div>
+</div>

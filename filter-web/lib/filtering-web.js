@@ -30,7 +30,7 @@ config(configFile, function (err, conf) {
 
     server.listen(conf.api.port, function listenServer() {
         log.info({
-            message: 'Vizceral server started',
+            message: 'Filtering server started',
             name: conf.api.serverName,
             port: conf.api.port
         });

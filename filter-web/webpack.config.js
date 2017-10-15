@@ -16,6 +16,10 @@ module.exports = {
                 loader: 'babel-loader'
             },
             {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader?name=public/fonts/[name].[ext]'
+            },
+            {
                 test: /\.html$/,
                 loader: 'html-loader'
             },
@@ -35,8 +39,8 @@ module.exports = {
     },
     devtool: 'source-map-support',
     devServer: {
-        contentBase: './dist',
-        hot: true
+        contentBase: path.join(__dirname, "dist"),
+	    port: 9000
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
@@ -52,7 +56,6 @@ module.exports = {
             __HIDE_DATA__: !!process.env.HIDE_DATA
         }),
         new HtmlWebpackPlugin({
-            title: 'Filtering',
             template: './lib/static/index.html',
             inject: true
         })
