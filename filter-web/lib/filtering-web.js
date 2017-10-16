@@ -7,7 +7,7 @@ const http = require('http');
 /**
  * Reads the config file and bootstraps the API
  */
-var configFile = process.argv[2] || './conf/config.json';
+let configFile = process.argv[2] || './conf/config.json';
 
 if (!process.argv[2] && process.env.ENVIRONMENT) {
     configFile = `./conf/service-${process.env.ENVIRONMENT}.json`;

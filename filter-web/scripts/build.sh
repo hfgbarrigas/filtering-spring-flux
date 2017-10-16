@@ -2,5 +2,5 @@
 
 rm -rf node_modules
 rm -rf dist
-npm install --production
+npm install
 npm run build-web-prod

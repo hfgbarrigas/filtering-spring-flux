@@ -1,3 +1,8 @@
+Project Structure
+=======
+Service implemented using spring flux that exposes a REST api and uses mongodb database
+Web app implemented using angularjs 1.6 and its served using NodeJS
+
 Build
 =======
 mvn clean install
@@ -8,7 +13,7 @@ Run
 =======
 Needs docker installed.
 
-Run - docker-compose build && docker-compose up
+Run - docker-compose build && docker-compose up (or start)
 
 Stop - docker-compose stop
 
@@ -33,11 +38,11 @@ curl localhost:8080/persons - H 'Accept: application/json'
 
 WebApp
 ======
-browser - localhost:8081
+localhost:8081/filtering
 
 TODO
 ======
 - remove dangling containers when build fails or it's interrupted
 (docker ps -> docker kill/stop)
-- Webapp
+- Webapp unit tests
 - Some improvements, move some values over to properties and leverage configuration server

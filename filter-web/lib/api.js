@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-var compression = require('compression');
+const compression = require('compression');
 
 module.exports = (config, log) => {
 	const app = express();

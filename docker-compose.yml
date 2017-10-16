@@ -10,18 +10,16 @@ services:
       - mongo
     environment:
       - ENVIRONMENT=qa
-    container_name: filter-service
   filter-web:
     build: ./filter-web
     ports:
      - "8081:8081"
     links:
-      - filter-service
+      - "filter-service"
     depends_on:
-      - filter-service
+      - "filter-service"
     environment:
       - ENVIRONMENT=qa
-    container_name: filter-web
   mongo:
     image: "mongo:latest"
     container_name: mongo
