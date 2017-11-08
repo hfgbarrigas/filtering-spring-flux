@@ -7,7 +7,7 @@ if [ -z "$ENVIRONMENT" ]; then
     echo "Using $ENVIRONMENT as environment"
 fi
 
-java \
+exec java \
 -Xmx500M -Xms200M \
 -jar \
 -Dnetworkaddress.cache.ttl=60 \

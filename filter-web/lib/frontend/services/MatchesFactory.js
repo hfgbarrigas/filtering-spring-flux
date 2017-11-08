@@ -1,8 +1,8 @@
 import buildUrl from 'build-url';
 
-function MatchesFactory($http, $timeout, $rootScope) {
+function MatchesFactory($http) {
 	function getMatches(withPhoto, inContact, favourite, maxAge, minAge, maxHeight, minHeight, maxCompatScore, minCompatScore,
-	                    distance, distanceUnit, latitute, longitude) {
+	                    distance, distanceUnit, latitude, longitude) {
 
 		let url = buildUrl('http://localhost:8080', {
 			path: 'persons',
@@ -18,7 +18,7 @@ function MatchesFactory($http, $timeout, $rootScope) {
 				maxCompatibilityScore: maxCompatScore,
 				distance: distance,
 				distanceUnit: distanceUnit,
-				lat: latitute,
+				lat: latitude,
 				lon: longitude
 			}
 		});
@@ -38,6 +38,6 @@ function MatchesFactory($http, $timeout, $rootScope) {
 	}
 }
 
-MatchesFactory.$inject = ['$http', '$timeout', '$rootScope'];
+MatchesFactory.$inject = ['$http'];
 
 export default MatchesFactory;

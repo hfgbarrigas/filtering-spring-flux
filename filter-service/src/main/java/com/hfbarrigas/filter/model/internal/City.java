@@ -13,6 +13,14 @@ public class City implements Serializable{
     @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
     private Coordinates coordinates;
 
+    public City() {
+    }
+
+    public City(String name, Coordinates coordinates) {
+        this.name = name;
+        this.coordinates = coordinates;
+    }
+
     public String getName() {
         return name;
     }

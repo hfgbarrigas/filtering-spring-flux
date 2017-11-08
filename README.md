@@ -44,5 +44,4 @@ TODO
 ======
 - remove dangling containers when build fails or it's interrupted
 (docker ps -> docker kill/stop)
-- Webapp unit tests
 - Some improvements, move some values over to properties and leverage configuration server

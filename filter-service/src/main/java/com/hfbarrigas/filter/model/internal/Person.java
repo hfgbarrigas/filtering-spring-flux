@@ -20,6 +20,24 @@ public class Person implements Serializable {
     private String displayName;
     private City city;
 
+    public Person() {
+    }
+
+    public Person(String id, Integer age, String jobTitle, Integer heightInCm, String mainPhoto,
+                  Float compatibilityScore, Integer contactsExchanged, Boolean favourite, String religion,
+                  String displayName, City city) {
+        this.id = id;
+        this.age = age;
+        this.jobTitle = jobTitle;
+        this.heightInCm = heightInCm;
+        this.mainPhoto = mainPhoto;
+        this.compatibilityScore = compatibilityScore;
+        this.contactsExchanged = contactsExchanged;
+        this.favourite = favourite;
+        this.religion = religion;
+        this.displayName = displayName;
+        this.city = city;
+    }
 
     public String getId() {
         return id;

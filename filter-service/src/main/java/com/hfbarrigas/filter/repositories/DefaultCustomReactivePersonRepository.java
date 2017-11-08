@@ -9,12 +9,14 @@ import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 import reactor.core.publisher.Flux;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.springframework.data.mongodb.core.query.Query.query;
@@ -34,34 +36,40 @@ public class DefaultCustomReactivePersonRepository implements CustomReactivePers
     public Flux<Person> findBy(@Nullable Boolean withPhoto,
                                @Nullable Boolean inContact,
                                @Nullable Boolean favourite,
-                               @Nullable Float minCompatibilityScore,
-                               @Nullable Float maxCompatibilityScore,
-                               @Nullable Integer minAge,
-                               @Nullable Integer maxAge,
-                               @Nullable Integer minHeight,
-                               @Nullable Integer maxHeight,
+                               @Nonnull Float minCompatibilityScore,
+                               @Nonnull Float maxCompatibilityScore,
+                               @Nonnull Integer minAge,
+                               @Nonnull Integer maxAge,
+                               @Nonnull Integer minHeight,
+                               @Nonnull Integer maxHeight,
                                @Nullable Float distance,
                                String distanceUnit,
                                Double lat,
                                Double lon) {
 
+        Objects.requireNonNull(minCompatibilityScore, "minCompatibilityScore cannot be null.");
+        Objects.requireNonNull(maxCompatibilityScore, "maxCompatibilityScore cannot be null.");
+        Objects.requireNonNull(minAge, "minAge cannot be null.");
+        Objects.requireNonNull(maxAge, "maxAge cannot be null.");
+        Objects.requireNonNull(minHeight, "minHeight cannot be null.");
+        Objects.requireNonNull(maxHeight, "maxHeight cannot be null.");
+
         final Criteria criteria = buildCriteria(withPhoto, inContact, favourite, minCompatibilityScore, maxCompatibilityScore,
                 minAge, maxAge, minHeight, maxHeight, distance, distanceUnit, lat, lon);
-
 
         return reactiveMongoTemplate.find(query(criteria), Person.class);
     }
 
-    @Nullable
+    @Nonnull
     private Criteria buildCriteria(@Nullable Boolean withPhoto,
                                    @Nullable Boolean inContact,
                                    @Nullable Boolean favourite,
-                                   @Nullable Float minCompatibilityScore,
-                                   @Nullable Float maxCompatibilityScore,
-                                   @Nullable Integer minAge,
-                                   @Nullable Integer maxAge,
-                                   @Nullable Integer minHeight,
-                                   @Nullable Integer maxHeight,
+                                   @Nonnull Float minCompatibilityScore,
+                                   @Nonnull Float maxCompatibilityScore,
+                                   @Nonnull Integer minAge,
+                                   @Nonnull Integer maxAge,
+                                   @Nonnull Integer minHeight,
+                                   @Nonnull Integer maxHeight,
                                    @Nullable Float distance,
                                    String distanceUnit,
                                    Double lat,
@@ -84,23 +92,27 @@ public class DefaultCustomReactivePersonRepository implements CustomReactivePers
         Optional.ofNullable(favourite).ifPresent(bool -> criterias.add(new Criteria(Constants.FAVOURITE).is(bool)));
 
         //compatibility score
-        Optional.ofNullable(minCompatibilityScore).ifPresent(minScore -> criterias.add(new Criteria(Constants.COMPATIBILITY_SCORE).gte(minScore)));
-        Optional.ofNullable(maxCompatibilityScore).ifPresent(maxScore -> criterias.add(new Criteria(Constants.COMPATIBILITY_SCORE).lte(maxScore)));
+        criterias.add(new Criteria(Constants.COMPATIBILITY_SCORE).gte(minCompatibilityScore));
+        criterias.add(new Criteria(Constants.COMPATIBILITY_SCORE).lte(maxCompatibilityScore));
 
         //age
-        Optional.ofNullable(minAge).ifPresent(min -> criterias.add(new Criteria(Constants.AGE).gte(min)));
-        Optional.ofNullable(maxAge).ifPresent(max -> criterias.add(new Criteria(Constants.AGE).lte(max)));
+        criterias.add(new Criteria(Constants.AGE).gte(minAge));
+        criterias.add(new Criteria(Constants.AGE).lte(maxAge));
 
         //height
-        Optional.ofNullable(minHeight).ifPresent(min -> criterias.add(new Criteria(Constants.HEIGHT_IN_CM).gte(min)));
-        Optional.ofNullable(maxHeight).ifPresent(max -> criterias.add(new Criteria(Constants.HEIGHT_IN_CM).lte(max)));
+        criterias.add(new Criteria(Constants.HEIGHT_IN_CM).gte(minHeight));
+        criterias.add(new Criteria(Constants.HEIGHT_IN_CM).lte(maxHeight));
 
         //distance - geo spatial
         Optional.ofNullable(distance).ifPresent(distanceValue -> {
+            Objects.requireNonNull(distanceUnit, "distanceUnit cannot be null");
+            Objects.requireNonNull(lat, "lat cannot be null");
+            Objects.requireNonNull(lon, "lon cannot be null");
+
             Distance mongoDistance = new Distance(distanceValue, DistanceUnits.valueOf(distanceUnit.toUpperCase()).getMongoMetric());
             criterias.add(new Criteria(Constants.CITY_COORDINATES).nearSphere(new Point(lat, lon)).maxDistance(mongoDistance.getNormalizedValue()));
         });
 
-        return criterias.isEmpty() ? null : new Criteria().andOperator(criterias.toArray(new Criteria[criterias.size()]));
+        return new Criteria().andOperator(criterias.toArray(new Criteria[criterias.size()]));
     }
 }

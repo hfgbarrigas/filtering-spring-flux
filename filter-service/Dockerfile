@@ -14,5 +14,4 @@ COPY target/filter-service*.jar /usr/opt/service/filtering.jar
 EXPOSE 8080
 
 #execute run script
-RUN chmod 700 run.sh
-CMD ["./run.sh"]
+ENTRYPOINT exec sh "./run.sh"

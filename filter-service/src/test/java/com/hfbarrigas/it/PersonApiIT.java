@@ -1,7 +1,8 @@
-package com.hfbarrigas.filter;
+package com.hfbarrigas.it;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hfbarrigas.filter.FilterApplication;
 import com.hfbarrigas.filter.model.api.Person;
 import org.assertj.core.util.Strings;
 import org.junit.Assert;
@@ -26,7 +27,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(classes = FilterApplication.class ,webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ActiveProfiles("it")
 public class PersonApiIT {
 

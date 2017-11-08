@@ -2,7 +2,8 @@ import {forOwn, isUndefined, has} from 'lodash';
 
 function MatchDetailsFactory() {
 
-	function MatchDetails(imageUrl, age, jobTitle, height, compatibilityScore, contacts, favourite, religion, displayName, latitude, longitude) {
+	function MatchDetails(imageUrl, age, jobTitle, height, compatibilityScore, contacts, favourite, religion, displayName,
+	                      latitude, longitude, city) {
 		this.imageUrl = imageUrl;
 		this.age = age;
 		this.jobTitle = jobTitle;
@@ -14,6 +15,7 @@ function MatchDetailsFactory() {
 		this.displayName = displayName;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.city = city;
 	}
 
 	function parseData(data, result) {
@@ -35,7 +37,8 @@ function MatchDetailsFactory() {
 		let result = {};
 		parseData(data, result);
 		return new MatchDetails(result.imageUrl, result.age, result.jobTitle, result.height, result.compatibilityScore,
-			result.contacts, result.favourite, result.religion, result.displayName, result.city, result.latitude, result.longitude);
+			result.contacts, result.favourite, result.religion, result.displayName, result.city, result.latitude,
+			result.longitude, result.city);
 	};
 
 	return MatchDetails;

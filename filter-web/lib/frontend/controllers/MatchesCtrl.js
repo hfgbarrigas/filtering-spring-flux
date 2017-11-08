@@ -1,4 +1,4 @@
-function GoogleAPIAutocompleteCtrl(MatchesFactory, MatchDetails, $timeout, $rootScope) {
+function MatchesCtrl(MatchesFactory, MatchDetails) {
 
 	let ctrl = this;
 
@@ -80,8 +80,7 @@ function GoogleAPIAutocompleteCtrl(MatchesFactory, MatchDetails, $timeout, $root
 		).then((data) => {
 			ctrl.data.matches = data.map(MatchDetails.build);
 		}, (err) => {
-			//do something with this
-			console.error(err);
+			ctrl.data.matches = [];
 		});
 	}
 
@@ -92,6 +91,6 @@ function GoogleAPIAutocompleteCtrl(MatchesFactory, MatchDetails, $timeout, $root
 	_init();
 }
 
-GoogleAPIAutocompleteCtrl.$inject = ['MatchesFactory', 'MatchDetails', '$timeout', '$rootScope'];
+MatchesCtrl.$inject = ['MatchesFactory', 'MatchDetails'];
 
-export default GoogleAPIAutocompleteCtrl;
+export default MatchesCtrl;
